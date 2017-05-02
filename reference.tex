@@ -1,0 +1,2362 @@
+\documentclass[10pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[pdfpagelabels]{hyperref}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+
+
+
+\begin{document}
+
+\pagenumbering{Alph}
+
+\title{CAP Reference}
+\author{\href{mailto:joe@tardis.ed.ac.uk}{joe@tardis.ed.ac.uk}}
+\date{April 2016}
+
+
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+
+\renewcommand{\abstractname}{calculus and its applications}
+\begin{abstract}
+These are a bunch of revision notes I wrote while trying to learn the course. Due to reasons, I couldn't attend very many lectures or submit any homework. This basically resulted in me learning the course from scratch during the Easter break. I'm publishing these (unpolished) notes informally in case they help someone else -- good luck and godspeed.
+
+You can find an up-to-date version of this file, its source, and intermediary LaTeX files here (I'm still learning LaTeX, this document is pretty ugly):
+
+\noindent \url{https://moo.joe.fo/cap/}
+
+A direct link to this rendered document can be found here:
+
+\noindent \url{https://moo.joe.fo/cap/reference.pdf}
+
+
+If you have any corrections, please \href{mailto:joe@tardis.ed.ac.uk}{email me}, or poke me in IRC. I lurk in \href{http://imaginarynet.uk}{ImaginaryNet}\#compsoc.
+
+\thispagestyle{empty}
+\hypersetup{pageanchor=false} % disable the pageanchor for the abstract page
+% as it breaks things *sadface
+\end{abstract}
+
+\newpage
+
+\hypersetup{pageanchor=true}
+\pagenumbering{arabic}
+\tableofcontents
+
+
+
+
+\chapter{review of algebra and limits}
+
+1.1 and 1.2 are a review of Algebra. I skimmed these sections; the content here should be familiar to you by now.
+
+\section{functions}
+Domain and Range: the domain of a function is the set of values it is defined on. The range (co-domain) is the set of values that the domain maps to.
+If a formula is a \emph{function}, there is only one defined value in the co-domain for each value of the domain -- that is to say, the mapping is one-to-one or many-to-one but not one-to-many (the vertical line test).
+Know how piecewise functions are defined:
+$$ f(x) =
+	\begin{cases}
+		1 - x 	& \quad \text{if } x \leq 1 \\
+		x^2		& \quad \text{if } x > 1 \\
+	\end{cases}
+$$
+
+Know about symmetry -- is $f(x)$ an even or odd function?
+What does it mean for a function to be even: $f(x) = -f(x)$ or odd: $f(-x) = -f(x)$?
+Increasing and decreasing functions: $\forall x_2 > x_1 \quad f(x_2) > f(x_1)$ represents an increasing function.
+
+\emph{Recommended exercises: 1, 5, 9, 21, 33, 39, 45, 57.}
+
+\section{general functions}
+Function composition.
+General Functions (polynomials, rational functions, power functions, trig functions).
+Domain and Range in the context of composed functions.
+If the domain of $f$ is $A$ and of $g$ is $B$ then the domain of $f + g$ is $A \cap B$, as is the domain of $fg$. Unsurprisingly, the domain of $f/g$ is not as straightforward.
+Function composition $f(g(x))$ or $f \circ g$ and decomposition -- generating $f$ and $g$ from some complex $F(x)$:
+$$
+F(x) = (2x + x^2)^4 
+$$
+So we can say
+$$
+F(x) = f \circ g 
+$$
+Where
+$$
+	\begin{cases}
+		f(x) = x^4 & \\
+		g(x) = 2x + x^2 & 
+	\end{cases}
+$$
+
+This is quite a useful concept ($d(f \circ g)/dx$).
+The Heaviside function is introduced as:
+$$
+H(t) = 
+	\begin{cases}
+		0 	& \quad \text{if } t < 0 \\
+		1 	& \quad \text{if } t \geq 0 \\
+	\end{cases}
+$$
+
+\emph{ex: 1, 17, 19, 27, 39, 45, 47, 57, 59.}
+
+\section{limits}
+``Intuitive'' definition of a limit, and strict definition of a limit.
+Suppose $f(x)$ is defined when $x$ is near the number $a$, i.e. $f(x)$ is defined over $(a - h, a) \cup (a, a + h)$ for some small number $h$. Then,
+$$
+	\lim_{x \to a} f(x) = L
+$$
+
+Sometimes this is also expressed:
+
+$$
+	f(x) \to L \quad \text{as} \quad x \to a
+$$
+
+This section also defines the one-sided limit, allowing us to consider it applied to the Heaviside function:
+
+$$
+	\lim_{t \to 0^-} H(t) = 0 \qquad
+	\lim_{t \to 0^+} H(t) = 1
+$$
+
+Naturally, $t \to a^-$ refers to values below $a$ (left-hand limit) and $t \to a^+$ means look only to values above $a$ (right-hand limit).
+
+The discussion of right- and left-handed limits leaves us to find that:
+
+$$
+	\lim_{x \to a} f(x) = L \quad \iff \lim_{x \to a^-} f(x) = L \quad \text{and } \quad \lim_{x \to a^+} f(x) = L
+$$
+
+This definition helps define whether or not a limit exists.
+
+
+
+\subsection{limit definition}
+
+Let $f$ be a function defined on some open interval that contains the number $a$, except possibly at $a$ itself. Then,
+
+$$
+	\lim_{x \to a} f(x) = L
+$$
+
+if for every number $\epsilon > 0$ there is a corresponding number $\delta > 0$ such that
+
+$$
+	\text{if} \quad 0 < |x - a| < \delta \qquad \text{then} \qquad |f(x) - L| < \epsilon
+$$
+
+The precise definition of a limit is not on the syllabus (NE, except by extension).
+
+\emph{ex: 1, 3, 9, 11, 15}
+
+\section{calculating limits}
+
+We now go on to calculate limits without plugging in values into a calculator or graphing functions.
+
+\subsection{limit laws}
+
+There are various limit laws that help us calculate limits. Those marked with an asterisk do not apply when $a = \pm \infty$:
+
+We suppose that $c$ is a constant and the limits $\lim_{x \to a} f(x) \quad \text{and} \quad \lim_{x \to a} g(x)$ exist. Then
+
+Sum Law:
+$$
+	\lim_{x \to a} [ f(x) + g(x) ] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x) 
+$$
+
+Difference Law:
+$$
+	\lim_{x \to a} [ f(x) - g(x) ] = \lim_{x \to a} f(x) - \lim_{x \to a} g(x) 
+$$
+
+Constant Multiple Law:
+$$
+	\lim_{x \to a} [ cf(x) ] = c \lim_{x \to a} f(x)
+$$
+
+Product Law:
+$$
+	\lim_{x \to a} [ f(x) g(x) ] = \lim_{x \to a} f(x) * \lim_{x \to a} g(x)
+$$
+
+Quotient Law:
+$$
+	\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)} \quad \text{if } \lim_{x \to a} g(x) \ne 0
+$$
+
+Power Law:
+$$
+	\lim_{x \to a} [ f(x) ]^n = [\lim_{x \to a} f(x)]^n \quad \text{where } n \text{ is a positive integer}
+$$
+
+Root Law:
+$$
+	\lim_{x \to a} \sqrt[n]{f(x)} = \sqrt[n]{\lim_{x \to a} f(x)} \quad \text{where } n \text{ is a positive integer}
+$$
+
+Some special limits:
+
+\begin{align*}
+	\lim_{x \to a} c &= c \\
+	\lim_{x \to a} x &= a \\
+	\lim_{x \to a} x^n &= a^n \quad \text{where } n \text{ is a positive integer*} \\
+	\lim_{x \to a} \sqrt[n]{x} &= \sqrt[n]{a} \quad \text{where } n \text{ is a positive integer*}
+\end{align*}
+
+You may be asked to use fundamental limit laws to derive some limit. These are the magic laws. You will notice here we have implied and go on to define the \emph{direct substitution property}, namely that if $f$ is a polynomial or rational function (or a trig function) and $a$ is in the domain of $f$, then:
+
+$$
+	\lim_{x \to a} f(x) = f(a)
+$$
+
+We build on this later.
+
+A short but helpful note allows us to compute limits of functions like:
+$$
+	\lim_{x \to 1} \frac{x^2 - 1}{x - 1}
+$$
+
+We can substitute $g(x) = x + 1$, which is valid because $g(x)$ takes the same values as the given function, except at $x = 1$. Generally,
+$$
+	\text{If } f(x) = g(x) \text{ when } x \ne a \text{, then } \lim_{x \to a} f(x) = \lim_{x \to a} g(x) \text{, provided the limit exists.}
+$$
+
+This point is emphasised in example 3, where
+$$
+	f(x) = 
+	\begin{cases}
+		x + 1 & \quad \text{if } x \ne 1 \\
+		\pi & \quad \text{if } x = 1
+	\end{cases}
+$$
+and you are asked to find $\lim_{x \to 1} f(x)$. Although $f(1)$ is clearly $\pi$, the limit is not $\pi$, but instead 2 (let $g(x) = x+1$)!
+
+Example 5 in the textbook points to another handy trick (that was also mentioned in the last lecture of term, since it was in the mock!) which is handy in evaluating limits of functions with a irrational numerator,
+$$
+	\lim_{t \to 0} \frac{\sqrt{t^2 + 9} - 3}{t^2}
+$$
+
+Since the denominator must not equal zero, we can't yet apply the quotient rule. However, we need to rationalise the numerator, which leads to a handy solution (hint: multiply by $\frac{\sqrt{t^2 + 9} + 3}{\sqrt{t^2 + 9} + 3}$) -- you should find the limit comes to $\frac{1}{6}$.
+
+Next up, a reminder that you can calculate limits be considering the left- and right-hand limits. You can use this in evaluating the limit of $f(x) = |x|$, or to prove a limit does not exist (try evaluating $f(x) = \frac{|x|}{x}$).
+
+If the left-hand and right-hand limits are not equal, the limit is undefined.
+
+\subsection{limit relationships and squeeze thm}
+
+If $f(x) \leq g(x)$ when $x$ is near $a$ (except possibly at $a$) and the limits of $f$ and $g$ both exist as $x$ approaches $a$, then
+$$
+	\lim_{x \to a} f(x) \leq \lim_{x \to a} g(x)
+$$
+
+This result is not surprising, but is important in the Squeeze Thm, allowing us to calculate very difficult limits if we can choose specific functions that are near our target function.
+
+If $f(x) \leq g(x) \leq h(x)$ when $x$ is near $a$ (except possibly at $a$) and
+$$
+	\lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L
+$$
+then
+$$
+	\lim_{x \to a} g(x) = L
+$$
+
+The squeeze theorem is useful for evaluating the limits of functions that are difficult to evaluate by pure limit laws alone, for example
+$$\lim_{x \to 0} x^2 \sin \frac{1}{x} $$
+
+
+
+\subsection{q. 11}
+
+$$
+	\lim_{x \to -2} \frac{x + 2}{x^3 + 8}
+$$
+This seems difficult at first, since the quotient rule cannot be applied.
+However, recognising that $x^3 + 8 = (x+2)(x^2 - 2x + 4)$ allows the limit to be evaluated trivially.
+
+So factorising rational functions is a key method in evaluating limits.
+
+Question 27 asks you to find the differential of $x^3$ using limits (but we haven't covered this so it's kind of just shown).
+
+\subsection{q. 37}
+
+$$
+	\lim_{x \to 3} [2x + |x - 3|]
+$$
+
+This builds on the textbook's note of breaking up the limit, by letting $f(x) = 2x + |x - 3|$, so that we are evaluating $\lim_{x \to 3} f(x)$, where
+$$
+	f(x) = 
+	\begin{cases}
+		2x + (x - 3) = 3x - 3 & \quad \text{for } x \geq 3 \\
+		2x - (x - 3) = x + 3 & \quad \text{for } x < 3 \\
+	\end{cases}
+$$
+We can now evaluate the right and left limits.
+
+Right:
+$$
+	\lim_{x \to 3^+} [3x - 3] = 6
+$$
+
+Left:
+$$
+	\lim_{x \to 3^-} [x + 3] = 6
+$$
+
+The limits agree so $\lim_{x \to 3} f(x) = 6$. We could also have split this limit up before evaluating each part:
+$$
+	\lim_{x \to 3} 2x + \lim_{x \to 3} |x - 3|
+$$
+(and then proceeded as before). Question 39 is another of these, as is question 43.
+
+
+\emph{ex: 1, 3, 9, 11, 19, 27, 37, 39, 43.}
+
+\section{continuity}
+
+We need to define continuity so that we can characterise functions that are continuous. So, $f$ is continuous at $a$ if
+$$
+	\lim_{x \to a} f(x) = f(a)
+$$
+
+The textbook points out that the check on whether $f$ is continuous breaks down into these points:
+
+\begin{enumerate}
+	\item $a$ is in the domain of $f$, so that $f(a)$ exists
+	\item $\lim_{x \to a} f(x)$ exists
+	\item $\lim_{x \to a} f(x) = f(a)$
+\end{enumerate}
+
+As in limits, we can define left- and right- handed continuity,
+left (``continuous from the left''):
+$$
+	\lim_{x \to a^-} f(x) = f(a)
+$$
+Right:
+$$
+	\lim_{x \to a^+} f(x) = f(a)
+$$
+
+Functions can be continuous on some interval. To show this, you need to evaluate $\lim_{x \to a} f(x)$, showing that it is indeed $f(a)$. This has the annoyance that it looks like you've done nothing, so be careful that you don't break any rules about limits.
+
+We get a Thm providing the Limit Law cases applied to continuous functions, and a restating of the Direct Substitution Property:
+
+Let $f$ and $g$ be continuous at $a$, and $c$ be a constant. The following functions are also continuous:
+
+\begin{itemize}
+	\item $f + g$
+	\item $f - g$
+	\item $cf$
+	\item $fg$
+	\item $\frac{f}{g}$ if $g(a) \ne 0$
+\end{itemize}
+
+You can prove these by using the subsequent limit laws, showing that (for example) 
+$$
+\lim_{x \to a} [f(x) + g(x)] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = f(a) + g(a)
+$$
+
+The Direct Subst. Prop has two parts:
+
+\begin{enumerate}
+	\item Any polynomial is continuous on $\mathbb{R}$
+	\item Rational functions, root functions, and trig functions are all continuous on their own domain.
+\end{enumerate}
+
+You can prove (1) by proving that a sum of $g(x) = cx^m$ is continuous. (2) logically follows on, provided you except breaks in the domain of these functions.
+
+We also get introduced to a new limit law.
+
+The Apparating Limit Law:
+$$
+	\lim_{x \to a} f(g(x)) = f(\lim_{x \to a} g(x))
+$$
+
+Also, another continuous function property following on from the apparating limit law:
+
+If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f \circ g$ given by $(f \circ g)(x) = f(g(x))$ is continuous at $a$.
+
+The follow-up examples use these properties backwards to `decompose' compound functions.
+
+Next up, the Intermediate Value Thm (IVT). Apparently, we are far too lowly students of mere calculus and the proof is way beyond what our meagre brains could even begin to comprehend. Nevertheless,
+
+Suppose $f$ is continuous on $[a, b]$, and let $N$ be any number between $f(a)$ and $f(b)$, where $f(a) \ne f(b)$. Then $\exists c \in (a, b)$ such that $f(c) = N$.
+
+Frankly, its annoying that the proof of this is so complex as the theorem itself is pretty intuitive, and if it weren't true that would kinda break everything (how many times have you had to find $x$ such that $f(x) = k$ for some $k$? -- the IVT guarantees that if $f$ is continuous, there will be (at least) a solution to this problem). The IVT can be abused to locate roots of polynomials (sign test).
+
+\subsection{types of discontinuity}
+
+We like to define different types of discontinuity:
+\begin{enumerate}
+	\item \emph{removable discontinuity} (hole) -- $f(x)$ is not defined at a point.
+	\item \emph{jump discontinuity} -- $f(x)$ is defined to be a different value at a point, so $\lim_{x \to a} f(x) \ne f(a)$ at $a$.
+	\item \emph{infinite discontinuity} -- $f(x) \to \infty$ or $f(x) \to -\infty$. 
+\end{enumerate}
+
+\subsection{q. 23}
+
+I'm including this question in these notes because it illustrates a point of care when evaluating the domain of root functions.
+
+\emph{Explain why the function $M(x)$ is continuous at every number in its domain, and state the domain of $M(x)$}
+$$
+	M(x) = \sqrt{1 + \frac{1}{x}}
+$$
+
+$M(x)$ is a root function, and so by our previous definitions, will be continuous at all points on its domain. We can note that
+$$
+	\lim_{x \to a} M(x) = M(a)
+$$
+which shows continuity for points in its domain. Now to define its domain. Clearly we must exclude $x = 0$, and we must ensure that $1 + \frac{1}{x} \geq 0$. However, the algebra to establish this leaves a point worth noting.
+$$
+	1 + \frac{1}{x} \geq 0
+$$
+Since $x$ is here on the denominator, we need to introduce another $x$ to solve our problem. This however leads to there being more than one solution -- so we need to consider both and choose the one that fulfils our original restriction.
+$$
+	\frac{x + 1}{x} \geq 0 \quad \text{or} \quad
+	\frac{x + 1}{x} \leq 0
+$$
+Yielding
+$$
+	x \geq -1 \quad \text{or} \quad x \leq -1
+$$
+at which point it becomes clear that $x \leq 1$ is our solution, and thus the domain becomes $(-\infty, -1] \cup (0, \infty)$.
+
+\emph{ex: 1, 3, 5, 7, 15, 19, 23, 31.}
+
+\section{infinite limits and asymptotes}
+
+Previously, we defined divergent limits as not existing. However, we can be more specific about \emph{how} a function diverges.
+Specifically, we define $\infty$, meaning we can take values to be arbitrarily large.
+
+So we can evaluate limits at infinity, which follows the same limit laws, minus a few. There are also some special limits that only apply when evaluating limits to infinity. The most important is the following:
+
+The Infinite Reciprocal Law: (Let $n$ be a positive integer)
+$$
+	\lim_{x \to \pm \infty} \frac{1}{x^n} = 0
+$$
+
+There are a few tricks that are outlined in the textbook, which help evaluate tricky limits involving ratios.
+$$
+	\lim_{x \to \infty} \frac{3x^2 - x - 2}{5x^2 + 4x + 1}
+$$
+The trick is multiplying by $\frac{ \frac{1}{x^2} }{ \frac{1}{x^2} }$. This yields,
+$$
+	\lim_{x \to \infty} \frac{3 - \frac{1}{x} - \frac{2}{x^2}}{5 + \frac{4}{x} + \frac{1}{x^2}}
+$$
+We can then apply the quotient limit law and use the fact that $\lim_{x \to \infty} \frac{1}{c} = 0$. This leaves us with the answer that the limit tends to $\frac{3}{5}$.
+
+A horizontal asymptote is defined as being the line $y = L$, if either:
+$$
+	\lim_{x \to \pm \infty} f(x) = L
+$$
+
+And a vertical asymptote is when at some constant $c$:
+$$
+	\lim_{x \to c^{(\pm)}} f(x) = \pm \infty
+$$
+
+\emph{ex: 1, 3, 11, 13, 19, 23, 33, 41, 43.}
+
+\section*{review}
+\addcontentsline{toc}{section}{review}
+
+Whew! That's the end of chapter 1. A few basic pointers to answer questions, about limits.
+
+\begin{itemize}
+	\item When faced with a limit where you would like to apply the quotient rule, but can't because the denominator would be zero, consider factorising the numerator to see if things cancel. Often they will.
+
+	\item If you have a rational function on the numerator, consider the results of multiplying by its conjugate.
+
+	\item When evaluating limits to infinity, if the numerator and denominator are polynomials in $x$, divide through by the largest power of $x$ to remove non-constant terms.
+
+	\item Some tricky limits can be evaluated with help of the squeeze theorem.
+\end{itemize}
+
+Chapter 1 also talks a lot about functions. Since this is (mostly) review, I will skim over it, but remember the Intermediate Value Theorem and definitions of continuity (and asymptotes) -- as well as function composition.
+
+
+
+
+
+% ------------------------ %
+% ----END OF CHAPTER 1---- %
+% ------------------------ %
+
+%                          %
+%                          %
+%                          %
+
+% (this amount of spacing  %
+% should be enough to      %
+% show up in your editor's %
+% outline view)            %
+
+
+\chapter{derivatives}
+
+
+% I wish I was writing this on OSX. Those keybindings doe, mmm.
+% (of course, I mean emacs keybindings + OSX basic = gloriousness)
+% y'all gotta live in the best of both worlds, install sublemacspro.
+
+\section{derivatives}
+
+We want to be able to find the tangent at a point on a line. The book shows the derivation of the following limit, which you have probably seen before.
+
+The tangent line to $y = f(x)$ at the point $P(a, f(a))$ is the line through $P$ with slope
+$$
+	f'(a) = m = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+$$
+(provided this limit exists).
+
+If we let $h = x - a$, so that $x = a + h$, then
+$$
+	f'(x) = m = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+(once again, provided this limit exists). This form of finding the slope of the tangent line is very commonly seen, and is the definition of the derivative, $f'(x)$.
+
+So the derivative of a function is the slope of the tangent line to $y = f(x)$ at a point. Another interpretation of the derivative is the instantaneous rate of change of $f(x)$ with respect to $x$ -- the average rate of change of $y$ with respect to $x$ is:
+$$
+	\frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+$$
+...and the instantaneous rate of change is:
+$$
+	\lim_{x_2 \to x_1} \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+$$
+
+Short but dense chapter.
+
+\subsection{q. 1(i)(a)}
+
+Since this is not shown in the textbook. We are asked to apply the first definition given to find the slope of $y = 4x -x^2$ at $(1, 3)$. We let $f(x) = y$ and apply the first definition:
+$$
+	m = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+$$
+
+In this instance, we have $a$ and $f(a)$ as $1$ and $3$ respectively. Substituting all givens in, we get:
+$$
+	m = \lim_{x \to 1} \frac{4x - x^2 - 3}{x - 1}
+$$
+
+Which we can then solve as normal (factorising allows us to cancel the $x - 1$ term).
+
+\emph{ex: 1, 5, 9, 17, 35, 39, 49.}
+
+
+\section{the derivative function}
+
+Erm, we already said this, but just in case you weren't paying attention:
+$$
+	f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}
+$$
+This is a function that can vary on $x$.
+
+There are some alternate notations for this function:
+$$
+	f'(x) = y' = \frac{dy}{dx} = \frac{df}{dx} = \frac{d}{dx}f(x) = Df(x) = D_x f(x)
+$$
+
+The notation $dy/dx$ is Leibniz notation, which comes from
+$$
+	\frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+$$
+
+Also introduced is the notation for the derivative at a specific point:
+$$
+	\left. \frac{dy}{dx} \right|_{x=a}
+	\quad \text{or} \quad
+	\left. \frac{dy}{dx} \right]_{x=a}
+$$
+
+A function $f$ is differentiable at $a$ if $f'(a)$ exists. It is differentiable on an open interval $(a, b)$ if it is differentiable at every number in this interval.
+
+This fact leads to the fact that if $f$ is differentiable at $a$, then $f$ is continuous at $a$.
+
+The converse is proved false by counterexample: namely $f(x) = |x|$ is continuous at 0, but not differentiable at 0.
+
+$f(x)$ will not be differentiable at $a$ if:
+\begin{itemize}
+	\item $f(x)$ has a `corner' in $a$.
+	\item $f(x)$ is discontinuous at $a$. This is the contrapositive of ``if $f$ is differentiable at $a$, then $f$ is continuous at $a$'' (from above).
+	\item $\lim_{x \to a} | f'(x) | = \infty $ (that is, $f(x)$ has a vertical tangent at $x = a$).
+\end{itemize}
+
+An example of the third case is $f(x) = \sqrt[3]{x}$. $f(x)$ is continuous there, and has no `corner', but is not differentiable (see q. 45)!
+
+We can also find further derivatives of a function -- the second derivative, $f''$ is defined in Leibniz notation as
+$$
+	\frac{d}{dx} (\frac{dy}{dx}) = \frac{d^2y}{dx}
+$$
+
+Generally the \emph{n-th} derivative of $f$ is expressed
+$$
+	y^{(n)} = f^{(n)} (x) = \frac{d^n y}{dx^n}
+$$
+
+\subsection{q. 45(a)}
+
+Let $f(x) = \sqrt[3]{x}$.
+
+Using the fact that:
+$$
+  f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+$$
+
+Find $f'(a)$ when $a \ne 0$. So we are trying to find
+$$
+	\lim_{x \to a} \frac{\sqrt[3]{x} - \sqrt[3]{a}}{x - a}
+$$
+
+With hints from IRC (let $u = x^{1/3}$ and $v = a^{1/3}$), then we have:
+$$
+  \lim_{x \to a} \frac{u - v}{u^3 - v^3}
+$$
+
+Helpfully, the denominator is now a difference of cubes!
+$$
+  \lim_{x \to a} \frac{u - v}{(u - v)(u^2 + uv + v^2)}
+$$
+
+We can then cancel and resubstitute:
+$$
+  \lim_{x \to a} \frac{1}{x^{\frac{2}{3}} + x^{\frac{1}{3}}a^{\frac{1}{3}} + a^{\frac{2}{3}}}
+$$
+
+Which gives us
+$$
+  \frac{1}{a^{\frac{2}{3}} + a^{\frac{2}{3}} + a^{\frac{2}{3}}}
+$$
+
+Tidying simply to
+$$
+	\frac{1}{3x^{\frac{2}{3}}}
+$$
+
+\emph{ex: 1, 3, 11, 13, 25, 33, 39, 45.}
+
+\pagebreak[4]
+
+\section{basic differentiation formulae}
+
+We get some basic differentiation formulae for basic functions, and some that expand of their respective limit laws (assume $c$ is a constant, and $f$ and $g$ are differentiable).
+
+\begin{itemize}
+	\item The differential of a constant function, $f(x) = c$, is zero. In Leibniz notation, we say that $\frac{d}{dx} (c) = 0$
+	\item Power rule: $\frac{d}{dx} (x^n) = nx^{n - 1}$
+	\item Constant multiple rule: $\frac{d}{dx} [cf(x)] = c \frac{d}{dx} f(x)$
+	\item Sum Rule: $\frac{d}{dx}[f(x) + g(x)] = \frac{d}{dx} f(x) + \frac{d}{dx} g(x)$
+	\item Difference Rule: $\frac{d}{dx}[f(x) - g(x)] = \frac{d}{dx} f(x) - \frac{d}{dx} g(x)$
+\end{itemize}
+
+The proofs of these are in the textbook, but are recommended for you to try yourself (hint: $f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$).
+
+We also get the proofs that $\frac{d}{dx} \sin x = \cos x$ and $\frac{d}{dx} \cos x = - \sin x$.
+
+At this point the textbook has a quick tangent (can you believe I've only just brought up that pun -- such restraint, no?) to talk about rates of change of displacement over time. The gist of it is this:
+If $s(t)$ is the displacement of a particle with respect to time, then $v(t) = \frac{d}{dt} s(t)$ and represents the velocity of the particle, and $a(t) = \frac{d}{dt} v(t)$ represents the acceleration.
+
+
+\emph{ex: 5, 9, 17, 21, 25, 27, 33, 43, 49, 55.}
+
+
+\section{product and quotient rules}
+
+This chapter introduces, proves, and demonstrates another two extremely commonly used differentiation rules (let $f$ and $g$ be differentiable):
+
+\begin{itemize}
+	\item Product Rule: $\frac{d}{dx}[f(x)g(x)] = f(x) \frac{d}{dx} g(x) + g(x) \frac{d}{dx} f(x)$
+	\item Quotient Rule: $(\frac{f}{g})' = \frac{gf' - fg'}{g^2}$
+
+\end{itemize}
+
+(The Leibniz notation for the quotient rule is really messy, so I'm leaving it in prime notation).
+
+We also get another trig identity from the quotient rule: $\frac{d}{dx} \tan x = \sec^2 x$.
+
+This allows us to construct a table of derivatives of trig functions, but for eye-scanning purposes, I'll include it after the next chapter.
+
+\emph{ex: 7, 13, 21, 31(a), 43, 49, 53, 55.}
+
+\section{chain rule}
+
+If $f$ and $g$ are both differentiable and $F = f \circ g$, then $F$ is differentiable and $F'$ is given by (let $y = f(u)$ and $u = g(x)$)
+\begin{itemize}
+	\item Chain Rule: $F'(x) = f'(g(x)) * g'(x)$
+	\item Chain Rule: $\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx}$
+\end{itemize}
+
+It is worth noting that the chain rule combines nicely with the power rule when evaluating certain derivatives, and gives ($n \in \mathbb{R}$, $u = g(x)$ and $\exists u'$):
+$$
+	\frac{d}{dx}(u^n) = nu^{n-1} \frac{du}{dx}
+$$
+
+\subsection{a bunch of trig identities}
+
+The book `suggests' you memorise these:
+
+$$
+	\frac{d}{dx}(\sin x) = \cos x
+$$
+$$
+	\frac{d}{dx}(\cos x) = - \sin x
+$$
+$$
+	\frac{d}{dx}(\tan x) = \sec^2 x
+$$
+$$
+	\frac{d}{dx}(\csc x) = -\csc x \cot x
+$$
+$$
+	\frac{d}{dx}(\sec x) = \sec x \tan x
+$$
+$$
+	\frac{d}{dx}(\cot x) = - \csc^2 x
+$$
+
+Unsurprisingly, these are easily shown using the differentiation rules, and the counterpart $\sin$ and $\cos$ derivatives.
+
+
+\subsection*{2.4.1 q. 55(a)}
+\addcontentsline{toc}{subsection}{[ 2.4.1 q. 55(a) ]}
+
+\emph{Prove that if $f$, $g$, and $h$ are differentiable, then $(fgh)' = f'gh + fg'h + fgh'$}.
+
+The `trick' is to let $F = fg$, then we are trying to find $(Fh)'$ -- a considerably easier task (product rule):
+$$
+	(Fh)' = Fh' + hF'
+$$
+
+And use the product rule again to find $F'$:
+$$
+	F' = (fg)' = fg' + gf'
+$$
+
+So we have our given, namely:
+$$
+	(fgh)' = (fg)h' + h(fg' + gf')
+$$
+
+
+
+
+\emph{ex (2.5): 9, 13, 35, 41, 51, 57, 63, 65, 69.}
+
+
+\section{implicit differentiation}
+
+(This section is not core, but is still examinable).
+
+Some functions are defined explicitly -- one variable in terms of another (think $y = 3x$), but others are not defined in this way (think $x^2 + y^2 = 25$). Although it may be possible to solve these implicit functions to make them explicit, the implicit functions may often be far too complicated to wrangle.
+
+The principle of implicit differentiation is best illustrated in an example -- we will find $\frac{dy}{dx}$ given $x^2 + y^2 = 25$:
+
+$$
+	\frac{d}{dx}(x^2 + y^2) = \frac{d}{dx}(25)
+$$
+
+$\frac{d}{dx} c = 0$ if $c$ is a constant.
+
+$$
+	\frac{d}{dx}(x^2) + \frac{d}{dx}(y^2) = 0
+$$
+
+We now apply the chain rule -- remembering that $\frac{d}{dx} y^2 = \frac{d}{dy} y^2 \frac{dy}{dx} = 2y \frac{dy}{dx}$ (in ratio terms, we expand a cancelling $dy$). So we have
+
+$$
+	2x + 2y \frac{dy}{dx} = 0
+$$
+
+Which we can easily solve for $\frac{dy}{dx} = -\frac{x}{y}$.
+
+There aren't any definitions or theorems in this chapter.
+
+\emph{ex: 1, 3, 9, 19}
+
+
+\section{not covered}
+
+\emph{This section on related rates is not part of the course.}
+
+
+\section{linear approximations and differentials}
+
+Sometimes, we desire to approximate curves to a tangent line that touches the curve at a specific point, $a$. This is known as linear approximation and takes the form:
+$$
+	f(x) \approx L(x) = f(a) + f'(a)(x - a)
+$$
+
+Where $L(x)$ is referred to as the linearisation of $f$ at $a$. This follows point-slope form of a line, namely
+$$
+	y = y_1 + m(x - x_1)
+$$
+
+We use it to approximate points near $a$, where these points are impossible (or too expensive) to calculate.
+
+This section builds on the idea of $dx$ being an independent variable, such that
+$$
+	dy = f'(x) dx
+$$
+
+Clearly, $dy$ is dependent, and we can choose values for $x$ in the domain of $f$, and any real number for $dx$, allowing us to determine $dy$. Remember, that $f'(x)$ is equivalent to the slope of a tangent line at $x$. A geometric interpretation explains these quantities: $dy$ represents the change in linearisation -- that is, the amount the tangent line increases or decreases.
+
+Letting $dx = x - a$ so that $x = a + dx$, we get a new interpretation of the linear approximation (we substitute in $dy = f'(x)dx$ from above):
+$$
+	f(a + dx) \approx f(a) + dy
+$$
+
+This interpretation is useful in allowing us to estimate error in approximate measures. See the textbook for an example of this.
+
+
+\emph{ex: 1,  3,  9,  13,  15,  17,  21,  27, 29.}
+
+\section*{review}
+\addcontentsline{toc}{section}{review}
+
+That brings us to the end of chapter 2. There isn't really too much to review here -- I would say that although not easy, differentiation is straightforward and you need to be able to apply and follow the rules. 
+
+One thing the study guide harps on that I haven't mentioned much in these notes is the \emph{notion} of the derivative -- that is to say it is rate of change. There are many, many real-world examples of this and the Newtonian mechanics section is all but one.
+
+
+
+
+
+
+
+
+
+
+
+% ------------------------ %
+% ----END OF CHAPTER 2---- %
+% ------------------------ %
+
+%                          %
+%                          %
+%                          %
+
+% (this amount of spacing  %
+% should be enough to      %
+% show up in your editor's %
+% outline view)            %
+
+
+
+
+
+
+\chapter{inverse functions}
+
+
+\section{exponential functions}
+
+We define exponential functions to be those that are of the form
+$$
+	f(x) = a^x
+$$
+(where $a$ is a positive constant). In the case that $x \in \mathbb{Z}$, this function's value is quite obvious -- but how do we evaluate $f(\sqrt{2})$, say?
+
+Since all irrational numbers can be expressed by an infinite string of decimal digits, there exists a rational number close to every irrational number. So we can define
+$$
+	a^x = \lim_{r \to x} a^r \quad r \text{ rational}
+$$
+
+We now characterise $f(x)$ and provide its properties:
+
+\noindent If $a > 0$ and $a \ne 1$, then $f(X) = a^x$ is continuous on $\mathbb{R}$ and has range $(0, \infty)$ -- $a^x > 0$ for all $x$.
+
+If $a, b > 0$ and $x, y \in \mathbb{R}$, then
+
+\begin{enumerate}
+	\item $a^{x + y} = a^x a^y$
+	\item $a^{x - y} = \frac{a^x}{a^y}$
+	\item $(a^x)^y = a^{xy}$
+	\item $(ab)^x = a^x b^x$
+\end{enumerate}
+
+These identities are likely familiar to you by now, but they can be proven using the limit laws and the above limit.
+
+We can also find the limits of $f(x)$ at positive and negative infinity:
+\begin{align*}
+	\text{If } a > 1 \text{, then} \quad & \lim_{x \to \infty} a^x = \infty \quad & \text{and} \quad \lim_{x \to -\infty} a^x = 0 \\
+	\text{If } 0 < a < 1 \text{, then} \quad & \lim_{x \to \infty} a^x = 0 \quad & \text{and} \quad \lim_{x \to -\infty} a^x = \infty \\
+\end{align*}
+
+Ok, next up we have the meaty topic of $e$.
+$$
+	e = \lim_{x \to 0} (1 + x)^\frac{1}{x}
+$$
+
+$e$ is just a number, which happens to lie between 2 and 3, and follows the rules to infinity above.
+
+\emph{ex: 1, 3, 9, 13, 17, 23, 25, 27.}
+
+
+\section{inverse functions and logarithms}
+
+Sometimes, we like to consider the inverse of a function -- instead of considering how $y$ varies as a function on $x$, you consider $x$ to be a function of $y$. If $y = f(x)$, then its inverse function, $f^{-1}$, would be denoted as $x = f^{-1}y$. In order to establish whether a function will posses an inverse, we need to consider how that function maps its input to its output.
+
+Function $f$ is a one-to-one function if it never takes the same value twice; namely that,
+$$
+	f(x_1) \ne f(x_2) \quad \text{whenever } x_1 \ne x_2
+$$
+
+Similarly to when we were testing to see whether $f$ was indeed a function, we can use a geometric approach to determine whether $f$ is one-to-one. This is the horizontal line test. A function is one-to-one iff no horizontal line intersects its graph more than once.
+
+Only one-to-one functions posses inverses that are also functions.
+
+Let $f$ be a one-to-one function with domain $A$ and range $B$. Then, $f^{-1}$ has domain $B$ and range $A$ and is defined by
+$$
+	f^{-1}(y) = x \iff f(x) = y
+$$
+For any $y \in B$.
+
+Unsurprisingly, $f^{-1}(f(x)) = x$ and $f(f^{-1}(x)) = x$, providing the domains match.
+
+The graph of $f^{-1}$ is the graph of $f$ reflected about $y = x$. Thus it would seem logical that if $f$ is a one-to-one continuous function, then $f^{-1}$ is also continuous -- this is true and proved in the textbook. Furthermore, if $f$ is a one-to-one differentiable function with inverse $f^{-1}$, and $f'f^{-1}(a)) \ne 0$, then the inverse function is also differentiable at $a$ and
+$$
+	(f^{-1})'(a) = \frac{1}{f'(f^{-1})(a)}
+$$
+
+In 3.1, we learned saw that exponential functions were either increasing or decreasing. This implies that they are one-to-one, meaning that they have an inverse function. We call this inverse the logarithmic function with base $a$, denoted $\log_a$. Using our definition of inverse function gives us that
+$$
+	\log_a x = y \iff a^y = x
+$$
+
+From the laws of exponents, we have the following laws of logarithms ($x, y > 0$):
+
+\begin{enumerate}
+	\item $log_a (xy) = log_a x + log_a y$
+	\item $log_a (\frac{x}{y}) = log_a x - log_a y$
+	\item $log_a x^r = rlog_a x$ ($r \in \mathbb{R}$)
+\end{enumerate}
+
+We also get some corresponding limits ($a > 1$):
+\begin{enumerate}
+	\item $\lim_{x \to \infty} \log_a x = \infty$
+	\item $\lim_{x \to 0^+} \log_a x = -\infty$
+\end{enumerate}
+
+The corresponding logarithm for $f(x) = e^x$ is $f^{-1}(x) = \ln x$. $\ln x$ is the symbol that refers to $\log_e x$.
+
+Finally, we get the change of base formula
+$$
+	\log_a x = \frac{\ln x}{\ln a}
+$$
+
+\subsection{evaluating inverse functions}
+
+Given a function $f$, finding $f^{-1}$ is trivial algebra by the following method:
+
+\begin{enumerate}
+	\item Set $y = f(x)$
+	\item Solve for $x$ in terms of $y$
+	\item Switch $x$ and $y$
+\end{enumerate}
+
+\subsection{q. 17}
+
+\emph{Given $g(x) = 3 + x + e^x$, find $g^{-1}(4)$.}
+
+Here, finding $g^{-1}$ using `usual' methods is very difficult -- as is trying to find $x$ when $g(x) = 4$ algebraically; however, in these questions, often evaluating simple values for the function can yield the answer. Here $g(0)$ is seen to be 4, so $g^{-1}(4) = 0$.
+
+\emph{ex: 3, 5, 7, 11, 17, 19, 23, 31, 35, 43, 59, 61, 69, 73.}
+
+\section{derivatives of logarithmic and exponential functions}
+
+We start this section by defining the derivative of a logarithmic function:
+$$
+	\text{if } f(x) = log_a x \quad \text{then} \quad f'(x) = \frac{1}{x} log_a e
+$$
+
+From the change of base formula, we can express $f'(x)$ also as
+$$
+	f'(x) = \frac{1}{x \ln a}
+$$
+
+Substituting $a = e$, this gives us the derivative of the special logarithm $\ln x$ (remember that $\ln e = 1$):
+$$
+	\frac{d}{dx} (\ln x) = \frac{1}{x}
+$$
+
+This fact demonstrates why $e$ is such an important constant in calculus. It is also easily shown that
+$$
+	\frac{d}{dx} (\ln |x|) = \frac{1}{x}
+$$
+as well.
+
+At this point, we also get the proof of the Power Rule -- working on the point that implicit differentiation combined with taking the logarithm of your function is a powerful tool for evaluating complex functions.
+
+We lead up to finding the differential of exponential functions, from the fact that logarithmic and exponential functions are inverse functions.
+
+If $f(x) = a^x$ where $a > 0$, then
+$$
+	f'(x) = a^x \ln a
+$$
+
+Once again, substituting $a = e$, we have
+$$
+	\frac{d}{dx} e^x = e^x
+$$
+
+Letting $u = f(x)$ and applying the chain rule gives the useful result that
+$$
+	\frac{d}{dx} e^u = e^u \frac{du}{dx}
+$$
+
+\emph{1, 5, 11, 19, 21, 23, 41, 61, 63.}
+
+\section{exponential growth and decay}
+
+As the textbook is wont to do, we come onto an application of the theory discussed in the previous sections. So, and as we came across earlier, we have the laws of natural decay and growth, governed by the differential equation:
+$$
+	\frac{dy}{dt} = ky
+$$
+
+The solutions to this differential equation are those that take the form
+$$
+	y(t) = y(0) e^{kt}
+$$
+
+An example is population growth, which can be modeled by the following expression
+$$
+	P(t) = P_0 e^{rt}
+$$
+
+Where $P_0$ and $r$ are determined from data. In this case, our differential equation would be
+$$
+	\frac{dP}{dt} = kP \quad \text{or} \quad \frac{1}{P}\frac{dP}{dt} = k
+$$
+
+The second form here giving the constant $k$, is referred to as relative growth rate.
+
+\subsection{newton's law of cooling}
+
+If the difference in temperature is not too large (and there is no state change), then the rate of cooling or heating follows the differential equation
+$$
+	\frac{dT}{dt} = k(T - T_s)
+$$
+
+\subsection{compound interest}
+
+$$
+	A(t) = A_0 (1 + \frac{r}{n})^{nt}
+$$
+
+Continuously compounded interest
+
+$$
+	A(t) = A_0 e^{rt}
+$$
+
+\emph{ex: 1, 3, 7, 9, 13, 19.}
+
+
+\section{inverse trig functions}
+
+Trig functions don't pass the horizontal line test (they are periodic!), so their inverses won't actually be functions. However, we can make a one-to-one trig function by restricting its domain such that it only covers one period.
+
+So, for example, the sine function defined only on $-\frac{\pi}{2} \leq x \leq \frac{\pi}{2}$ is one-to-one, and therefore possesses an inverse function, which we define as $\sin^{-1} x$ (or $\arcsin x$).
+
+Since $\sin x$ is differentiable, $\sin^{-1} x$ will also be differentiable, and 
+$$
+	\frac{d}{dx} \sin^{-1} x = \frac{1}{\sqrt{1 - x^2}} \quad \text{for} \quad -1 < x < 1
+$$
+
+The proof for this is well worth trying if you haven't, the hint being to let $y = \sin^{-1} x$ and taking $\sin$ of both sides.
+
+Moving onto cosine, we restrict the domain to $0 \leq x \leq \pi$, defining $\cos^{-1} x$ or $\arccos x$. Its derivative is $\frac{-1}{\sqrt{1 - x^2}}$ (for $-1 < x < 1$).
+
+Next up is the tangent function. Our period of choice is $(-\pi / 2, \pi / 2)$ (notice this time we have open ranges -- think about the graph of $\tan x$). The inverse tangent is expressed $\tan^{-1} x$ or $\arctan x$.
+
+We can find some interesting properties of $\arctan$ from properties we know about the tangent function -- namely that
+$$
+	\lim_{x \to \frac{\pi}{2}^-} \tan x = \infty \qquad \text{and} \qquad \lim_{x \to \frac{-\pi}{2}^+} \tan x = -\infty
+$$
+
+Remembering that functions are geometrically reflected about $y = x$ to obtain their inverse, leads us to
+$$
+	\lim_{x \to \infty} \tan^{-1} x = \frac{\pi}{2} \qquad \text{and} \qquad \lim_{x \to -\infty} \tan^{-1} x = -\frac{\pi}{2}
+$$
+
+The tangent function is differentiable so our inverse tangent function is also differentiable:
+$$
+	\frac{d}{dx} \tan^{-1} x = \frac{1}{1 + x^2}
+$$
+
+By the way, inverse tangent has a cool property bearing in mind that the range of tangent is $\mathbb{R}$ -- it's defined over $(-\infty, \infty)$.
+
+Other similar inverse functions exist for the three remaining trigonometric functions.
+
+\emph{ex: 1, 3, 5, 11, 19, 23, 31.}
+
+\section{not covered}
+
+Hyperbolic functions aren't covered.
+
+\section{indeterminate forms and L'Hospital's rule}
+
+Some functions, such as $F(x) = \frac{\ln x}{x - 1}$ are of the form $\frac{f(x)}{g(x)}$ where both $f(x)$ and $g(x)$ tend to 0 as $x$ tends to one. Such functions are called indeterminate forms since they may or may not have a defined limit at a point.
+
+In earlier functions, we solved problems of indeterminate forms of the form $\frac{0}{0}$ by cancelling or otherwise wrangling $g(x)$. Sadly, it is not always possible to do this algebraic magic trick, so we need another approach. Helpfully, L'Hospital's rule provides such an approach (isn't that convenient?).
+
+Another case where previous methods would have failed us is the evaluation of limits such as
+$$
+	\lim_{x \to \infty} \frac{\ln x}{x - 1}
+$$
+Here, you will note that both $f(x)$ and $g(x)$ both tend to infinity as $x$ tends to infinity.
+
+So suppose that $f$ and $g$ are differentiable and $g'(x) \ne 0$ near $a$. Also, we must have either
+\begin{align*}
+	\lim_{x \to a} f(x) = 0 \qquad & \text{and} \qquad \lim_{x \to a} g(x) = 0 \\
+	\text{or that } \quad \lim_{x \to a} f(x) = \pm \infty \qquad & \text{and} \qquad \lim_{x \to a} g(x) = \pm \infty 
+\end{align*}
+(this guarantees we have an indeterminate form of either $\frac{0}{0}$ or $\frac{\infty}{\infty}$). Then we have:
+$$
+	\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+$$
+If the limit on the right side exists (or is $\pm \infty$).
+
+Note: this is one of the first cases where there are very specific restrictions on when this rule applies. The book makes sure to remind you that you cannot just apply this rule willy-nilly. Make sure it actually is a thing before you go around doing this.
+
+With that note in mind, remember that L'Hospital's rule totally also works for one-sided limits and limits involving infinity.
+
+\subsection{indeterminate products}
+
+Suppose we are trying to evaluate $\lim_{x \to a} F(x)$ where $F = fg$. This kind of problem is often trivial, but in the special case where $f(x) \to 0$ as $x \to a$ and $g(x) \to \infty$ as $x \to a$, then the limit is more difficult to evaluate. This is an indeterminate form of $0 * \infty$.
+
+In this case, we instead express $fg$ as a quotient and apply L'Hospital's rule:
+$$
+	fg = \frac{f}{1/g} \qquad \text{or} \qquad fg = \frac{g}{1/f}
+$$
+(which one to use will often depend on which will leave the cleanest function to evaluate).
+
+\subsection{indeterminate differences}
+
+Another indeterminate form is $\infty - \infty$, which occurs in functions where we are evaluating $\lim_{x \to a} [f(x) - g(x)]$ and $f(x)$ and $g(x)$ go to infinity as $x \to a$. In order to evaluate these we must try to convert them into a product or a quotient (common denominator, rationalise, common factor, ...).
+
+Sadly, these can be quite tricky to evaluate, but the textbook gives a good example involving trig functions with a common factor.
+
+\subsection{indeterminate powers}
+
+Finally, we have the case that we are evaluating
+$$
+	\lim_{x \to a} [f(x)]^{g(x)}
+$$
+
+Which could result in $0^0$, $\infty^0$, or $1^\infty$. We evaluate these cases in one of two ways:
+
+\begin{enumerate}
+	\item Taking the $ln$, so that if $y = [f(x)]^{g(x)}$, we have $\ln y = g(x) \ln f(x)$
+	\item Writing the function as an exponential: $e^{g(x) \ln f(x)}$
+\end{enumerate}
+
+\emph{ex: 1, 3, 7, 9, 11, 41}
+
+\section*{review}
+
+End of chapter 3!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{applications of differentiation}
+
+\section{minmax values}
+
+Take the graph of $f$. We want to determine the maximum and minimum points in $f$, perhaps over a certain domain $(a, b)$, or perhaps globally. If $c$ is in the domain $D$ of $f$, then $f(c)$ is
+
+\begin{itemize}
+	\item absolute (global) maximum if $\forall x \in D$, $f(c) \geq f(x)$
+	\item absolute (global) minimum if $\forall x \in D$, $f(c) \leq f(x)$
+\end{itemize}
+
+Here, $f(c)$ would be referred to as the extreme value. 'Cos it's cray cray.
+
+We can also define a local minimum and maximum. That is, $f(c)$ is a
+
+\begin{itemize}
+	\item local maximum if $f(c) \geq f(x) \forall x$ near $c$.
+	\item local minimum if $f(c) \leq f(x) \forall x$ near $c$.
+\end{itemize}
+
+Total kek has thus been established. By the way, you'll have noticed that we did some super bullshit squishy `near $c$' bollocks up there. We define the term `near $c$' to mean some open interval containing $c$, for example $(c - k, c + h)$.
+
+We can predict whether or not a function will have extreme values using the extreme value theorem:
+
+If $f$ is continuous on the closed interval $[a, b]$, then $f$ attains an absolute maximum value, $f(c)$ and an absolute minimum value $f(d)$ at some numbers $c$ and $d$ in $[a, b]$.
+
+Bear in mind that these absolute minimum / maximum values \emph{do} contain the endpoints $a$ and $b$. If we were trying to find local minima and maxima, we would be considering an open interval and thus cannot consider the endpoints.	
+
+The extreme value theorem is logical if you consider any graph. Consider $y = x$. Over any closed interval, this will have an absolute maximum and minimum at the endpoints of its domain. However, if its domain is not restricted, it will be the open interval $(-\infty, \infty)$ (or $\mathbb{R}$) and so our theorem doesn't apply (and, in this case it doesn't have an absolute maximum or minimum).
+
+\subsection{Fermat's theorem}
+
+If $f$ has a local maximum or minimum at $c$ and $f'(c)$ exists, then $f'(c) = 0$.
+
+Apparently, people like to play mind games and believe the converse is also true. It is not (consider $y = x^3$). However, we do define critical numbers -- that is
+
+A critical number $c$ of function $f$, where $c$ is in the domain of $f$, is a number where either $f'(c) = 0$ or $f'(c)$ does not exist.
+
+Fermat's Theorem, combined with our definition of critical numbers, gives us a new definition for our theorem:
+
+If $f$ has a local maximum or minimum at $c$, then $c$ is a critical number of $f$.
+
+(this is kinda nice because it omits all talk of $f(c)$)
+
+\subsubsection{finding absolute minmax values}
+
+As a result of Fermat's theorem, we get a handy-dandy method for finding absolute maxima and minima for a continuous function $f$ on a closed interval $[a, b]$.
+
+\begin{enumerate}
+	\item Find the values of $f$ at the critical numbers of $f$ in $(a, b)$
+	\item Find the values of $f$ at $a$ and $b$
+	\item The largest value from above is the absolute maximum and the smallest is the absolute minimum
+\end{enumerate}
+
+\emph{ex: 1, 3, 5, 9, 13, 21, 33, 47, 51, 59.}
+
+\section{the mean value theorem}
+
+According to the textbook, the mean value theorem (mvt) is top kek. And we're gonna derive it, yo. But first, some stuff. And holy ballbag if the stuff it uses ain't useful!
+
+Rolle's Theorem states that if $f$ is a function that:
+\begin{enumerate}
+	\item is continuous on $[a, b]$
+	\item is differentiable on $(a, b)$
+	\item has $f(a) = f(b)$
+\end{enumerate}
+Then, $\exists c \in (a, b)$ such that $f'(c) = 0$
+
+Rolle's theorem combines nicely with the intermediate value theorem to provide some helpful insight to roots in (say) polynomials.
+
+\subsection{mvt}
+
+Let $f$ be a function that
+
+\begin{enumerate}
+	\item $f$ is continuous on $[a, b]$
+	\item $f$ is differentiable on $(a, b)$
+\end{enumerate}
+
+Then, $\exists c \in (a, b)$ such that
+$$
+	f'(c) = \frac{f(b) - f(a)}{b - a}
+$$
+
+or, equivalently,
+$$
+	f(b) - f(a) = f'(c)(b - a)
+$$
+
+Now we can from information about $f'$ to gather information about $f$ and vice-versa! 
+
+An example of a theorem the mvt allows you to establish is the highly obvious:
+
+If $f'(x) = 0 \quad \forall x \in (a, b)$, then $f$ is constant on $(a, b)$.
+
+Leading to the slightly less obvious:
+
+If $f'(x) = g'(x) \quad \forall x \in (a, b)$, then $f - g$ is constant on $(a, b)$, so that $f(x) = g(x) + c$ for constant $c$.
+
+\emph{ex: 3, 9, 15, 19, 23, 29, 33}
+
+\section{derivatives and the shape of graphs}
+
+
+We start with a pretty convenient point relating to $f'(x)$ and whether $f$ will be increasing or decreasing. Again, this seems pretty obvious, but hey.
+
+\begin{itemize}
+	\item If $f'(x) > 0$ on an interval, then $f$ is increasing on that interval.
+	\item If $f'(x) < 0$ on an interval, then $f$ is decreasing on that interval.
+\end{itemize}
+
+This is known as the increasing / decreasing (or I/D) test.
+
+We need a way of establishing whether a critical number is a maximum or minimum or just a turning point. So we use the first derivative test:
+
+Suppose $c$ is a critical number of $f$.
+
+\begin{itemize}
+	\item If $f'$ changes from positive to negative at $c$, $f$ has a local maximum at $c$
+	\item If $f'$ changes from negative to positive at $c$, $f$ has a local minimum at $c$
+	\item If $f'$ has no sign change then $f$ has no local maximum or minimum at $c$
+\end{itemize}
+
+
+\subsection{second derivatives}
+
+Next we consider the second derivative, $f''$, which tells us about the concavity of $f$. Concavity is whether a function `bends up' or `bends down', and we use the terms `concave up' and `concave down'. Strictly though,
+
+If the graph of $f$ lies above all its tangents on an interval $I$, then $f$ is concave upward on $I$. If, however, $f$ lies below all its tangents on interval $I$, then $f$ is concave downward on $I$.
+
+We saw this idea in action in our discussion on differentials to approximate function values -- we had to say whether we were under- or over-estimating a function.
+
+A point P on $y = f(x)$ is an inflection point if $f$ is continuous at $P$ and the curve changes from concavity.
+
+The idea of concavity is intrinsically linked to $f''(x)$, as enumerated by the concavity theorem:
+
+\begin{enumerate}
+	\item If $f''(x) > 0 \quad \forall x \in I$, then the graph of $f$ is concave upward on $I$
+	\item If $f''(x) < 0 \quad \forall x \in I$, the graph of $f$ is concave downward on $I$
+\end{enumerate}
+
+The concavity theorem spells out the idea that there must be an inflection point when $f''(x) = 0$. Now, we go on to determine whether that inflection point is at a local maximum or minimum.
+
+Suppose $f''$ is continuous near $c$.
+\begin{enumerate}
+	\item If $f'(c) = 0$ and $f''(c) > 0$, then $f$ has a local maximum at $c$
+	\item If $f'(c) = 0$ and $f''(c) < 0$, then $f$ has a local minimum at $c$
+\end{enumerate}
+
+This is known as the second derivative test, and it builds of the first derivative test and the concavity theorem.
+
+\emph{ex: 5, 9, 11, 15, 19, 23, 29, 45, 53, 63.}
+
+\section{curve sketching}
+
+Instead of writing notes about this chapter, I'm going to provide you with a small exposition.
+
+``My friend, I am tired''. Even finding the energy to deliver such an utterance was an immense effort. I lay on the muddied field of the great battle, surrounded by the fallen.
+
+\noindent \emph{``But surely you must see that we are successful!''}
+
+``Alas, do not let this one victory satiate you -- for do you see anybody celebrating?'' I had a point. Around, the young studied the scene, desperate to find a hint of their familiars.
+
+``I have not the strength to go on''.
+
+\noindent \emph{``It requires just one final push to reap the full reward of all we have achieved here! How can you not understand this?''}
+
+It was no use. The consoling seemed hollow, empty, as if both parties knew the end was nigh, but neither was willing to admit it.
+
+\subsection{a brief guide}
+
+According to Andre, this section is actually quite important. Therefore, so that I can move on as quickly as possible, I provide the following checklist.
+
+\begin{enumerate}
+	\item Domain
+	\item Intercepts (x-ints, y-int)
+	\item Symmetry (odd function, even function, periodic?)
+	\item Asymptotes (x-asymps are pretty easy to find for most functions, end behaviour will yield y-asmps)
+	\item Intervals of increase / decrease
+	\item Local maxima and minima
+	\item Concavity and points of inflection
+	\item Sketch
+\end{enumerate}
+
+\emph{ex: 1, 11, 23, 31, 33, 39, 45, 49, 53, 61.}
+
+\section{optimisation problems}
+
+Sometimes we want to, as in the youth vernacular, ``make bare p, fam''. Should this be the case, we can apply our knowledge of calculus to assist us in solving problems of these sort, specifically, but considering the maximum and minimum values of functions relating to our problem in question.
+
+Studying these problems in detail is essential in being able to solve them.
+
+The textbook recommends the following strategy in solving optimisation problems
+
+\begin{enumerate}
+	\item enumerate the givens, and determine what unknown is required. This could include drawing diagrams.
+	\item introduce notation that fits the problem to represent your known and unknown quantities.
+	\item find a relationship between your variables -- preferably one to link your unknown quantity to other quantities.
+	\item using givens and known quantities, establish an equation for your unknown as a function of one other variable.
+	\item use calculus to find the absolute maximum or minimum of the function you have obtained.
+\end{enumerate}
+
+To help establish whether a critical number is at a minimum or maximum, we use the first derivative test. However, since it may not apply to our extreme cases, we extend our definition:
+
+Suppose $c$ is a critical number of the continuous function $f$ defined on some interval.
+
+\begin{itemize}
+	\item If $f'(x) > 0 \quad \forall x < c$ and $f'(x) < 0 \quad \forall x > c$, then $f(c)$ is the absolute maximum value of $f$.
+	\item If $f'(x) < 0 \quad \forall x < c$ and $f'(x) > 0 \quad \forall x > c$, then $f(c)$ is the absolute minimum value of $f$.
+\end{itemize}
+
+This definition, the first derivative test for absolute extreme values, is also pretty obvious, but is quite useful in optimisation problems.
+
+\emph{ex: 1, 7, 11, 15, 19, 25, 33, 35, 37, 45, 51.}
+
+\section{not covered}
+
+Newton's method is fun but not on the syllabus.
+
+\section{antiderivatives}
+
+A function $F$ is an antiderivative of $f$ on an interval $I$ if
+$$
+	F'(x) = f(x) \quad \forall x \in I
+$$
+
+We want to establish how many antiderivatives exist for $f$, so we use the MVT (if two functions have the same derivatives on an interval, then they must differ only by a constant). This leads to the idea that if $F$ and $G$ are antiderivatives of $f$, then
+$$
+	F'(x) = f(x) = G'(x)
+$$
+
+meaning $G(x) - F(x) = C$, so that if $F$ is an antiderivative of $f$ on interval $I$, the most general antiderivative of $f$ on $I$ that exists is
+$$
+	F(x) + C
+$$
+
+(where $C$ is some constant).
+
+The book provides a few helpful antidifferentiation rules. Most of these will probably be obvious to you, but as a recap ($F' = f$, and $G' = g$):
+
+\begin{align*}
+	cf(x) \quad \to & \quad cF(x) \\
+	f(x) + g(x) \quad \to & \quad F(x) + G(x) \\
+	x^n \quad \to & \quad \frac{x^{n+1}}{n + 1} \\
+	\frac{1}{x} \quad \to & \quad \ln|x|
+\end{align*}
+
+These basic rules, combined with basic rules ($\cos x \to \sin x$, $e^x \to e^x$, ...) should allow you to determine many basic antidifferentiation problems.
+
+There's also a section on rectilinear motion (we back on the applications), explaining how you can go from $a(t) \to v(t) \to s(t)$.
+
+
+\emph{ex: 1, 3, 7, 17, 21, 37, 43, 49, 53.}
+
+\section*{review}
+
+Woo! End of Chapter 4!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{integrals}
+
+\section{area and distance}
+
+The first consideration is area under a graph -- that is, finding the area $A$ under $f(x)$ between $a$ and $b$.
+
+We start, naturally, with definitions. The first the book talks about is actually fairly bizarre -- we need to strictly establish what we mean by ``area''. However, defining the term area is tricky when given a curve.
+
+One way to solve this problem is to approximate the area under a curve with rectangles in a number of ways (depending on which corner or edge intersects the curve, we define $R_n$ to be the right-rectangle approximation with $n$ strips and $L_n$ to be the left-rectangle approximation to $n$ strips). Needless to say, as you increase the number of rectangles comprising this approximation, you get a closer approximation of the true area.
+
+In fact, we can perfectly evaluate this area by taking
+$$
+	\lim_{n \to \infty} R_n \qquad \text{or} \qquad \lim_{n \to \infty} L_n
+$$
+
+\subsection{sum rules}
+
+This can sometimes be evaluated as a regular limit, although usually it will require some special and helpful rules for finite sums:
+$$
+	\displaystyle\sum_{k = 1}^{n} k = \frac{1}{2} n (n + 1)
+$$
+$$
+	\displaystyle\sum_{k = 1}^{n} k^2 = \frac{1}{6} n(n+1)(2n+1)
+$$
+$$
+	\displaystyle\sum_{k = 1}^{n} k^3 = \frac{1}{4} n^2(n+1)^2
+$$
+$$
+	\displaystyle\sum_{i = 1}^{n} c = nc
+$$
+$$
+	\displaystyle\sum_{i = 1}^{n} ca_i = c \displaystyle\sum_{i = 1}^{n} a_i
+$$
+$$
+	\displaystyle\sum_{i = 1}^{n} (a_i + b_i) = \displaystyle\sum_{i = 1}^{n} a_i + \displaystyle\sum_{i = 1}^{n} b_i
+$$
+$$
+	\displaystyle\sum_{i = 1}^{n} (a_i - b_i) = \displaystyle\sum_{i = 1}^{n} a_i - \displaystyle\sum_{i = 1}^{n} b_i
+$$
+
+\subsection{infinite sums}
+
+At this point, we can consider the case where $n \to \infty$. The book uses the example where we are evaluating the area under $y = x^2$ between $x = 0$ and $x = 1$. Jumping straight to $n$ strips, we will have
+$$
+	R_n = \displaystyle\sum_{k = 1}^{n} \frac{1}{n} * \left(\frac{k}{n} \right)^2
+$$
+
+In each value for $k$, we are finding the area of a rectangle. Its base is $\frac{1}{n}$ wide -- in this case, that is the `strip length'. Since we are evaluating the right-rectangle approximation, its height is the value of $y$ at $\frac{k}{n}$ -- that is, $\left( \frac{k}{n} \right)^2$.
+
+Without using formal generalisations (taking this idea and evaluating it), we are left with finding
+$$
+	\lim_{n \to \infty} \displaystyle\sum_{k = 1}^{n} \frac{1}{n} * \left(\frac{k}{n} \right)^2
+$$
+
+We can't apply limit laws yet, so let's investigate
+$$
+	\lim_{n \to \infty} \displaystyle\sum_{k = 1}^{n} \frac{1}{n} * \left(\frac{k}{n} \right)^2 = \\
+	\lim_{n \to \infty} \frac{1}{n} * \left(\frac{1}{n} \right)^2 + \frac{1}{n} * \left(\frac{2}{n} \right)^2 + ... + \\
+	\frac{1}{n} * \left(\frac{n}{n} \right)^2
+$$
+
+We can pull out $\frac{1}{n^2}$ as a constant factor!
+$$
+	\lim_{n \to \infty} \frac{1}{n} * \frac{1}{n^2} (1^2 + 2^2 + ... + n^2)
+$$
+
+Consolidating to
+$$
+	\lim_{n \to \infty} \frac{1}{n^3} \displaystyle\sum_{k = 1}^{n} k^2
+$$
+
+Now we apply the aforementioned finite sum formula, yielding
+$$
+	\lim_{n \to \infty} \frac{1}{n^3} * \frac{1}{6} n(n+1)(2n+1)
+$$
+
+This looks like something we can solve!
+$$
+	\lim_{n \to \infty} \frac{(n+1)(2n+1)}{6n^2}
+$$
+(we cancelled a $n$)
+$$
+	\lim_{n \to \infty} \frac{1}{6} \left( 1 + \frac{1}{n} \right) \left( 2 + \frac{1}{n} \right)
+$$
+
+$\lim_{n \to \infty} \frac{1}{n} = 0$, so we get
+$$
+	\lim_{n \to \infty} \displaystyle\sum_{k = 1}^{n} \frac{1}{n} * \left(\frac{k}{n} \right)^2 = \\
+	\frac{1}{3}
+$$
+
+This is a rework of the textbook example, but I like this example a fair amount. We now generalise our definition of area to the following definition:
+
+The area $A$ of the region $S$ that lies under the graph of continuous function $f$ is the limit of the sum of the areas of approximating rectangles:
+$$
+	A = \lim_{n \to \infty} R_n = \lim_{n \to \infty} [f(x_1) \Delta x + f(x_2) \Delta x + ... + \\
+	f(x_n) \Delta x ]
+$$
+
+Note that since $f$ is continuous, this area will always exist. Also, note that we don't need specifically to use $R_n$ -- we can use $L_n$ or even use an arbitrary interval.
+
+We can apply this idea to find distance:
+$$
+	d = \lim_{n \to \infty} \displaystyle\sum_{t = 1}^{n} f(t_i) \Delta t
+$$
+
+\emph{ex: 1, 3, 9, 11, 13, 15, 19.}
+
+\section{the definite integral}
+
+We are building up to an extremely important definition, but first we need some notation. Firstly, we need to define the \emph{partition}. Namely, we need to break up an interval $[a, b]$ into subintervals $[x_0, x_1],  [x_1, x_2], [x_2, x_3], ..., [x_{n-1}, x_n]$, where $x_0, x_1, x_2, ..., x_n$ are partition points and 
+$$a = x_0 < x_1 < x_2 < ... < x_{n - 1} < x_n = b$$
+
+With our intervals, $[x_{i-1}, x_{i}]$, we let $\Delta x_i = x_i - x_{i-1}$, which is the length of the ith subinterval.
+
+Next, we chose sample points, $x_i^*$, which lie somewhere in the ith subinterval (we say that $x_i^* \in [x_{i-1}, x_i]$).
+
+\subsection{the Riemann sum}
+
+The Riemann sum associated with a partition $P$ and function $f$ is the rectangle with base of the size of the subinterval and height equal to the value of $f$ at the sample points:
+$$
+	\displaystyle\sum_{i = 1}^{n} f(x_i^*) \Delta x_i
+$$
+
+It's fairly clear here, that as $n \to \infty$, our approximation to the area under the graph of $f$ gets better. However, we here need to ensure that $\Delta x_i \to 0$, since we can have $x_i$ of any size. We call this the \emph{definite integral} of $f$ from $a$ to $b$.
+
+\subsection{the definite integral}
+
+If $f$ is a function continuous over a region, $[a, b]$, then the definite integral from $a$ to $b$ is the value
+$$
+	\int_{a}^{b} f(x) dx = \lim_{\max \Delta x_i \to 0} \displaystyle\sum_{i = 1}^{n} f(x_i^*) \Delta x_i
+$$
+Provided this limit exists. If it does, we say $f$ is integrable on $[a, b]$.
+
+Here, we use the notation $\max \Delta x_i$ to denote the largest strip (subinterval) $x_i$. We also can define our area using the idea of infinite strips as we did in the previous section. Namely, if $f$ is integrable on $[a, b]$, then
+$$
+	\int_a^b f(x)dx = \lim_{n \to \infty} \displaystyle\sum_{i = 1}^{n} f(x_i) \Delta x
+$$
+$$
+	\text{where} \qquad \Delta x = \frac{b - a}{n} \qquad \text{and} \qquad x_i = a + i \Delta x
+$$
+
+To help provide justification for this theorem, we need to introduce another theorem about continuity and 
+integrability:
+
+If $f$ is continuous on $[a, b]$, or if $f$ only has a finite number of jump discontinuities, then $f$ is integrable on $[a, b]$, so that $\int_a^b f(x)dx$ exists.
+
+\subsection{the midpoint rule}
+
+We previously looked at the cases where we consider the rectangles at the right and left endpoints of the subinterval, but there is one further special case: the case where we take $x_i^*$ to be the midpoint between $x_{i-1}$ and $x_i$. This can often lead to a more precise approximation of the integral. We donate these midpoints by $\overline{x}_i$.
+
+Of course, we previously noted that any Riemann sum is an approximation to an integral, but the midpoint rule gives us a specific approximation
+$$
+	\int_a^b f(x) dx \approx \displaystyle\sum_{i = 1}^n f(\overline{x}_i) \Delta x = \\
+		\Delta x [ f(\overline{x}_1 ) + ... + f(\overline{x}_n) ]
+$$
+
+Where, as before,
+$$
+	\Delta x = \frac{b - a}{n}
+$$
+
+and
+$$
+	\overline{x}_i = \frac{1}{2} (x_{i - 1} + x_i) = \text{midpoint of } [x_{i - 1}, x_i]
+$$
+
+\pagebreak
+
+\subsection{definite integral properties}
+
+
+Assuming that $f$ and $g$ are integrable functions, then we have the following properties that can help us evaluate complex integrals (suppose all these integrals exist):
+
+The Endpoint Rule:
+$$
+	\int_b^a f(x) dx = - \int_a^b f(x) dx
+$$
+
+The Endpoint-Constant Rule:
+$$
+	\text{if } a = b \text{ then } \Delta x = 0 \text{ and so } \int_a^a f(x) dx = 0
+$$
+
+The Constant-Function Rule:
+$$
+	\int_a^b c dx = c(b - a) \qquad \text{for any constant } c
+$$
+
+The Addition Rule:
+$$
+	\int_a^b [f(x) + g(x)] dx = \int_a^b f(x) dx + \int_a^b g(x) dx
+$$
+
+The Subtraction Rule:
+$$
+	\int_a^b [f(x) + g(x)] dx = \int_a^b f(x) dx + \int_a^b g(x) dx
+$$
+
+The Constant Term Rule:
+$$
+	\int_a^b cf(x) dx = c \int_a^b f(x)dx \qquad \text{where } c \text{ is any constant}
+$$
+
+The Endpoint Addition Rule:
+$$
+	\int_a^c f(x) dx + \int_c^b f(x) dx = \int_a^b f(x) dx
+$$
+
+\noindent The following comparison rules only apply if $a \leq b$.
+$$
+	\text{if } f(x) \geq 0 \text{ for } a \leq x \leq b \text{, then } \int_a^b f(x) dx \leq 0
+$$
+$$
+	\text{if } f(x) \geq g(x) \text{ for } a \leq x \leq b \text{, then } \int_a^b f(x) dx \leq \int_a^b g(x) dx
+$$
+$$
+	\text{if } m \leq f(x) \leq M \text{ for } a \leq x \leq b \text{, then } \\
+	m(b - a) \leq \int_a^b f(x) dx \leq M(b - a)
+$$
+
+\emph{ex: 1,  7,  9,  11,  15,  19,  21, 23, 29, 33, 41, 43.}
+
+
+\section{evaluating definite integrals}
+
+We start with the handy-dandy ``evaluation theorem'' -- if $f$ is continuous on $[a, b]$, then
+$$
+	\int_a^b f(x)dx = F(b) - F(a)
+$$
+where $F$ is an antiderivative of $f$, so that $F' = f$.
+
+A word on notation: When applying this theorem, we use the notation
+$$
+	F(x) \Big]_b^a = F(b) - F(a)
+$$
+(sometimes, you also see $F(x) \Big|_b^a$ or $\Big[F(x) \Big]_b^a$).
+
+This helpful fact conveniently makes evaluating integrals (at this stage) ridiculously easy.
+
+
+\subsection{indefinite integrals}
+
+Because of the magic evaluation theorem, we use the notation $\int f(x)dx$ to represent the antiderivative of $f(x)$ -- in other words,
+$$
+	\int f(x) dx = F(x) \qquad \text{means} \qquad F'(x) = f(x)
+$$
+
+
+There are a bunch of applications that the book now enumerates. Of note, however, is the Net Change Theorem, which is merely a restating of our evaluation theorem:
+$$
+	\int_a^b F'(x)dx = F(b) - F(a)
+$$
+(remember that $F'(x) = f(x)$).
+
+\emph{ex: 1,  7,  9,  11,  15,  19,  21,  23, 29, 33, 41, 43.}
+
+\section{the fundamental theorem of calculus}
+
+In the last section, we discussed how integration and differentiation are linked. The fundamental theorem of calculus unifies this concept.
+
+Suppose $f$ is continuous on $[a, b]$.
+
+\begin{enumerate}
+	\item If $g(x) = \int_a^x f(t) dt$, then $g'(x) = f(x)$.
+	\item $\int_a^b f(x)dx = F(b) - F(a)$, where $F$ is any antiderivative of $f$ ($F' = f$).
+\end{enumerate}
+
+A point to watch out for in the first part is that the upper limit, $x$, upon which $g(x)$ varies, is \emph{just} $x$ -- it's not $x^4$, for example. Upon encountering a problem where the upper limit is not $x$, you should consider a substitution and applying the Chain Rule.
+
+Another point is that FToC, part 2 is actually the evaluation theorem from the previous section. But, since it relates derivatives and integrals, it is part of the FToC.
+
+\subsection{average values, MVT for integrals}
+
+\subsubsection{average value of a function}
+
+$$
+	f_{ave} = \frac{1}{b - a} \int_b^a f(x)dx
+$$
+
+\subsubsection{mean value theorem for integrals}
+
+If $f$ is continuous on $[a, b]$, then $\exists c \in [a, b]$ such that:
+$$
+	f(c) = f_{ave} = \frac{1}{b - a} \int_a^b f(x)dx
+$$
+equally
+$$
+	\int_a^b f(x) dx = f(c) (b - a)
+$$
+
+This means that there exists a $c$ such that the rectangle with base $[a, b]$ and height $f(c)$ has the same area as the integral of $f$ from $a$ to $b$.
+
+\emph{ex: 1, 3, 5, 7, 11, 15, 19, 23, 27.}
+
+\section{the substitution rule}
+
+If you are coming from A-Levels or AP-Calc or similar syllabi, you are probably familiar with the substitution rule. It allows us to (relatively) easily evaluate some of the more complex integrands you might come across.
+
+If $u = g(x)$ is a differentiable function whose range is an interval $I$ and $f$ is continuous on $I$, then
+$$
+	\int f(g(x))g'(x) dx = \int f(u) du
+$$
+
+At this point, the book overloads you with examples. This can really help you see where the substitution rule applies, if it is new to you.
+
+We can extend the substitution to cover definite integrals (if $g'$ is continuous on $[a, b]$ and $f$ is continuous on the range of $u = g(x)$)
+$$
+	\int_a^b f(g(x))g'(x)dx = \int_{g(a)}^{g(b)} f(u) du
+$$
+
+Basically, we need to make sure the limits are in terms of our new variable if we chose to use substitution.
+
+\subsection{integral symmetry}
+
+You might have guessed that if a function $f$ is symmetric in some way, then the integral of $f$ will follow some rules -- this is true!
+
+If $f$ is continuous on $[-a, a]$:
+
+\begin{enumerate}
+	\item if $f$ is even, then $\int_{-a}^{a} f(x)dx = 2 \int_0^a f(x) dx$
+	\item if $f$ is odd, then $\int_{-a}^a = 0$
+\end{enumerate}
+
+Both of these are actually pretty intuitive upon considering graphs of even and odd functions.
+
+\emph{ex: 1, 3, 5, 7, 9, 13, 15, 25, 29, 35, 37, 39, 45, 47, 53, 59, 62, 63, 65.}
+
+\section*{review}
+
+End of chapter 5!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{techniques for integrating}
+
+\section{integration by parts}
+
+A cheeky rearrangement of the product rule for differentials leads us nicely to the formula for integration by parts. If $u = f(x)$ and $v = g(x)$ (where $f$ and $g$ are differentiable functions), then we have:
+$$
+	\int u dv = uv - \int v du
+$$
+
+This is sometimes also expressed in terms of $f(x)$ and $g(x)$:
+$$
+	\int f(x)g'(x) dx = f(x)g(x) - \int g(x) f'(x)dx
+$$
+
+The rest of this section is examples.
+
+\emph{ex: 1,  3,  9,  11,  13,  15,  19,  27, 31, 43.}
+
+
+\section{trig integrals and substitutions}
+
+Some integrals, such as $\int \cos^3 xdx$, can be very tricky without applying a change of form to them (substitutions at this point will invariably leave you in some kind of mess).
+
+However, remembering that $\cos^2x = 1 + \sin^2x$, $\cos^3x$ may be represented as $\cos x (1 + \sin^2 x)$. At this point, we can now perform a substitution (consider $u = sinx$).
+
+In general, you always would like some way to cancel down to just some $u$.
+
+Another handy-dandy substitution is the half-angle substitution
+$$
+	\sin^2x = \frac{1}{2} (1 - \cos 2x)
+$$
+$$
+	\cos^2x = \frac{1}{2} (1 + \cos 2x)
+$$
+
+A further useful identity:
+$$
+	\sin x \cos x = \frac{1}{2} \sin 2x
+$$
+
+Note: A general equation for $\int \sin^n x dx$ exists in the textbook (eqn. 6.1.7).
+
+Similar tricks exist for integrals involving tangent and secant functions.
+
+Bear in mind that
+$$
+	\int \sec x dx = \ln | \sec x + \tan x | + c
+$$
+
+\subsection{trig substitution}
+
+Some integrands under square roots can be wrestled with using the method of trigonometric substitution, which is a type of inverse substitution (you are going the other direction in the substitution rule -- consider $f(x) = \sqrt{x}$ and $g(x) = ...$).
+
+Take, as an example, $\int \sqrt{a^2 - x^2} dx$. This is tricky because no obvious substitution exists that'll cancel terms. However, if we let $x = a \sin \theta$, we are left with
+$$
+	\sqrt{a^2 - a^2 \sin^2 \theta}
+$$
+
+using the fact that $\cos^2 \theta = 1 - \sin^2 \theta $, we get
+$$
+	\sqrt{a^2 (1 - sin^2 \theta)} = \sqrt{a^2 \cos^2 \theta} = a \cos \theta
+$$
+
+Letting $x = a \sin \theta$ is only valid provided that this substitution is a one-to-one function. We manage this with a domain restriction, in this case by saying that $\theta$ must lie in $[-\pi/2, \pi/2]$.
+
+The useful identities are:
+
+\begin{align*}
+	\sqrt{a^2 - x^2} \to x = a \sin \theta, -\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2} \quad & \text{using:} \quad 1 - \sin^2 \theta = \cos^2 \theta \\
+	\sqrt{a^2 + x^2} \to x = a \tan \theta, -\frac{\pi}{2} < \theta < \frac{\pi}{2} \quad & \text{using:} \quad 1 + \tan^2 \theta = \sec^2 \theta \\
+	\sqrt{x^2 - a^2} \to x = a \sec \theta, 0 \leq \theta < \frac{\pi}{2} \text{ or } \pi \leq \theta < \frac{3\pi}{2} \quad & \text{using:} \quad \sec^2 \theta - 1 = \tan^2 \theta
+\end{align*}
+
+This kind of integral arrives often in evaluating the areas of circles and ellipses.
+
+\section{partial fractions}
+
+Partial fractions, and partial fraction decomposition is an essential method of evaluating integrals that take the form
+$$
+	f(x) = \frac{P(x)}{Q(x)}
+$$
+
+We want to try to break up $f(x)$ in order to be able to evaluate it. Firstly, we need to perform long division so that deg($P$) $<$ deg($Q$). Following that, we must try to express $Q(x)$ in terms of its factors, as far as possible.
+
+Next is to determine what kind of partial fraction the resulting quotient will result in
+
+\begin{enumerate}
+	\item Type A: $Q(x)$ is a product of distinct linear factors. Here, 
+	$$
+		Q(x) = (a_1 x + b_1)(a_2 x + b_2)...(a_k x+ b_k)
+	$$
+	where no $a_i = a_j$ and $b_i = b_j$ ($i, j \in [1..k] | i \ne j$).
+
+	In this case, the resulting partial fraction will be of the form:
+	$$
+		\frac{R(x)}{Q(x)} = \frac{A_1}{a_1x + b_1} + \frac{A_2}{a_2 x + b_2} + ... + \frac{A_k}{a_k x + b_k}
+	$$
+
+	Where $A_1 .. A_k$ are all constants to be determined.
+
+	\item Type B: $Q(x)$ is a product of linear factors, some of which are repeated. Supposing the first factor of $Q(x)$ is repeated, so $Q(x)$ has the form:
+	$$
+		Q(x) = (a_1 x + b_1)^r(a_2 x + b_2)...(a_k x+ b_k) \qquad \text{for some } r \in \mathbb{Z^+}
+	$$
+	Then, the partial fraction will have the form of type A, but with the term representing the first instead factor taking the form:
+	$$
+		\frac{A_1}{a_1x + b_1} + \frac{A_2}{(a_1 x + b_1)^2} + ... + \frac{A_r}{(a_1 x + b_1)^r}
+	$$
+
+	\item Type C: $Q(x)$ contains irreducible non-repeated quadratic factors. In the event that one of the factors of $Q(x)$ is an irreducible quadratic, so that
+	$$
+		Q(x) = (a_1 x^2 + b_1x + c)(a_2 x + b_2)...(a_k x+ b_k)
+	$$
+
+	($Q(x)$ may also have repeated non-quadratic factors). In this case, the expression for $R(x)/Q(x)$ will now have a term of the form
+	$$
+		\frac{Ax + B}{a_1 x^2 + b_1x + c}
+	$$
+
+	Here, we need to determine the constants $A$ and $B$. When dealing with this type of partial fraction, the book notes that completing the square, in combination with the identity
+	$$
+		\int \frac{dx}{x^2 + a^2} = \frac{1}{a} \tan^{-1} \left( \frac{x}{a} \right) + c
+	$$
+
+	will help clear up the resulting integral.
+
+	\item Type D: $Q(x)$ contains repeated irreducible quadratic factor(s). This follows the same pattern as Type A is to Type B, so that if $Q(x)$ contains a factor of the form
+	$$
+		(ax + bx + c)^r \qquad \text{for some } r \in \mathbb{Z^+}
+	$$
+
+	then the partial fraction will contain the sum
+	$$
+		\frac{A_1 x + B_1}{ax^2 + bx + c} + \frac{A_2 x + B_2}{(ax^2 + bx + c)^2} + ... + \frac{A_r x + B_r}{(ax^2 + bx + c)^r}
+	$$
+
+\end{enumerate}
+
+
+Needless to say, partial fractions can get pretty gnarly. Just believe in the gods of Algebra and you'll be fine.
+
+\emph{ex: 1, 3, 5, 7, 11, 17, 21, 23, 39, 45.}
+
+
+\section{not covered}
+
+6.4 (integration with CAS and tables) is not covered
+
+\section{not covered}
+
+6.5 (approximate integration) is not covered either
+
+\section{improper integrals}
+
+Okay, so this is a pretty novel concept. Previously, we were evaluating integrals that take the form $\int_a^b f(x)dx$. However, we now want to extend that to cover integrals where $a$ or $b$ is infinite. We'd also like to discover how to evaluate an integral over a function $f$, where $f$ has an infinite discontinuity.
+
+In other words, we're looking at asymptotic properties of an integral. These types of integrals are called improper and they come in two types.
+
+\subsection{type 1 improper integrals (with infinite limits)}
+
+We use an abbreviated notation to represent this type of integral. Helpfully, the notation also shows how we might evaluate it.
+
+If $\int_a^t f(x)dx$ exists for every number $t \geq a$, then
+$$
+	\int_a^{\infty} f(x) dx = \lim_{t \to \infty} \int_a^t f(x) dx
+$$
+(provided this limit exists, and is finite*).
+
+Alternately, we might have the case where $\int_t^b f(x) dx$ exists for every number $t \leq b$ and
+$$
+	\int_{-\infty}^b f(x)dx = \lim_{t \to -\infty} \int_t^b f(x)dx
+$$
+(with the same provision as before).
+
+If the above limits do exist, then they are called convergent. Otherwise, they are divergent.
+
+There is also the case where both limits exist. In this case, we can define
+$$
+	\int_{-\infty}^{\infty} f(x) dx = \int_{-\infty}^a f(x) dx + \int_a^{\infty} f(x) dx \qquad \text{for any } a \in \mathbb{R}
+$$
+
+Although we can pick any real $a$, some $a$ may be easier to work with than others (points of symmetry, for example).
+
+If $f$ is a positive function, then this region may also be called the area.
+
+
+\subsection{type 2 improper integrals (discontinuities)}
+
+If $f$ is continuous over $[a, b)$ and is discontinuous at $b$, then
+$$
+	\int_a^b f(x)dx = \lim_{t \to b^-} \int_a^t f(x) dx
+$$
+(if this limit exists and is finite)
+
+and similarly, if $f$ is continuous over $(a, b]$ and has a discontinuity at $a$, then
+$$
+	\int_a^b f(x)dx = \lim_{t \to a^+} \int_t^b f(x) dx
+$$
+
+The same definition for convergence and divergence applies as before. And, as before, we can define the case where $f$ has a discontinuity at $c$, where $a < c < b$, and both $\int_a^c f(x)dx$ and $\int_c^b f(x) dx$ are convergent, then
+$$
+	\int_a^b f(x) dx = \int_a^c f(x) dx + \int_c^b f(x) dx
+$$
+
+Now that we have introduced this idea, you must take care that any integral $\int_a^b f(x)$ is either continuous over $[a, b]$ or you must break it up and evaluate it in terms of limits.
+
+\subsection{the comparison theorem}
+
+In some cases, it may be unclear how to evaluate an integral exactly, yet still be interested in whether the integral converges or diverges. So we have the comparison theorem.
+
+Suppose $f$ and $g$ are continuous functions with $f(x) \geq g(x) \geq 0$ for $x \geq a$. Then
+\begin{enumerate}
+	\item If $\int_a^{\infty} f(x) dx$ is convergent, then $\int_a^{\infty} g(x) dx$ is convergent
+	\item If $\int_a^{\infty} g(x) dx$ is divergent, then $\int_a^{\infty} f(x) dx$ is divergent
+\end{enumerate}
+
+\emph{ex: 1, 3, 5, 7, 11, 15, 19, 23, 27, 33, 41, 45, 47, 53, 57.}
+
+
+\section*{review}
+
+End of Chapter 6.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{applications of integration}
+
+I'm out of time. Therefore, each section in this chapter is going to be summed up as quickly as possible.
+
+\section{areas between curves}
+
+Pretty much just
+$$
+	A = \int_a^b [f(x) - g(x)] dx
+$$
+($f(x)$ and $g(x)$ continuous and $f(x) \geq g(x) \quad \forall x \in [a, b]$).
+
+
+
+\section{volumes}
+
+$$
+	V = \int_a^b A(x) dx
+$$
+
+\section{not covered}
+
+volumes by cylindrical shells
+
+\section{arc length}
+
+If $f'$ continuous over $[a, b]$, then the length of $y = f(x), a \leq x \leq b$, is
+$$
+	L = \int_a^b \sqrt{1 + [f'(x)]^2} dx
+$$
+
+If the question asks about starting values or a function, it is referring to the arc length function:
+$$
+	s(x) = \int_a^x \sqrt{1 + [f'(t)^2]} dt
+$$
+
+\section{not covered}
+
+area of a surface of revolution
+
+\section{physics and engineering}
+
+Work ($F(x)$ is the force at $x$)
+$$
+	W = \int_a^b F(x)dx
+$$
+
+\noindent hydrostatic pressure (depth $d$, accel due to grav. $g$, density of fluid $\rho$)
+$$
+	P = \rho g d = \delta d = \frac{F}{A}
+$$
+
+\noindent moments and centre of mass ($f$ represents the function we are finding the centre of mass of)
+$$
+	\overline{x} = \frac{1}{A} \int_a^b xf(x) dx
+$$
+$$
+	\overline{y} = \frac{1}{A} \int_a^b \frac{1}{2}[f(x)]^2 dx
+$$
+
+
+\section{differential equations}
+
+I'll come back to you bb, don't you worry.
+
+
+
+\section*{review}
+
+Lol.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{series}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% p
+% a
+% d
+% d
+% i
+% n
+% g
+%
+
+% ----- %
+% notes %
+
+\chapter*{notes}
+
+An annoying inconsistency exists in defining functions. Namely, $f^{-1}$ explicitly means inverse function, but $f^2$ might very well refer to the square of $f$, $[f(x)]^2$. This is especially apparent in the trigonometric functions, where it is commonplace to see both $\sin^{-1} x$ and $\sin^2 x$.
+
+
+\begin{enumerate}
+	\item CAP: \quad 27/4/16
+	\item inf1-da: \quad 2/5/16
+	\item inf1-op: \quad 6/5/16
+\end{enumerate}
+
+\end{document}
