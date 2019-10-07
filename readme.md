@@ -1,7 +1,7 @@
 # Calculus notes
 
-Hi! This repo is to let people contribute to [my calculus 
-notes](https://moo.joe.fo/cap/) I hastily wrote while trying to pass a 
+Hi! This repo is to let people contribute to my calculus 
+notes I hastily wrote while trying to pass a 
 calculus course.
 
 They weren't polished and contain many bugs! :D
